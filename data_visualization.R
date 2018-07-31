@@ -1,0 +1,18 @@
+df1<-read.csv("datafile.csv")
+df1
+length(df1)
+summary(df1)
+colnames(df1)
+View(df1)
+dim(df1) # shape in python
+ncol(df1)
+nrow(df1)
+rownames(df1)
+plot(df1$Financial.Year)
+hist(df1$Gross.Domestic.Product..in.Rs..Cr..at.2004.05.Prices)
+hist(df1$Services..in.Rs..Cr...at.2004.05.Prices,col='Green')
+barplot(df1$Mining.and.Quarrying..in.Rs..Cr...at.2004.05.Prices)
+pie(df1$Agriculture...Share.to.Total.GDP)
+qplot(carat,data=diamonds,fill=color,geom="histogram")
+qplot(carat,data=diamonds,colour=color,geom="density")
+qplot(carat,data="datafile.csv",fill=color,geom="histogram")

@@ -1,0 +1,52 @@
+library("ggplot2")
+library("plyr")
+library("SnowballC")
+library("stringr")
+library("tm")
+library("wordcloud")
+book<-c("Data mining & data warehousing","Data Mining : Concepts","Introduction to Data Mining Concepts","Linear Algebra for real world","Text Mining : Techniques","Data mining","Data warehousing in the real world","Data warehousing fundamentals")
+length(book)
+book<-sort(book)
+docs<-Corpus(VectorSource(book))
+summary(docs)
+inspect(docs[2])
+getTransformations()
+docs<-tm_map(docs,tolower)
+inspect(docs)
+docs<-tm_map(docs,removePunctuation)
+inspect(docs)
+dtm<-DocumentTermMatrix(docs)
+dtm
+m<-as.matrix(dtm)
+m
+v<-sort(colSums(m),decreasing = TRUE)
+v
+words<-names(v)
+words
+d<-data.frame(word=words,freq=v)
+d
+wordcloud(d$word,d$freq,min.freq = 1)
+unlw<-unlist(strsplit(book," "))
+unlw
+kw<-unique(tolower(unlw))
+length(kw)
+kw
+sortkw<-sort(kw)
+docskw<-Corpus(VectorSource(sortkw))
+docskw
+docskwrm<-tm_map(docskw,removePunctuation)
+inspect(docskwrm)
+strippedocs<-tm_map(docskwrm,stripWhitespace)
+inspect(strippedocs)
+rmsw<-tm_map(strippedocs,removeWords,c(stopwords("english"),"for","in","to"))
+inspect(rmsw)
+rmsw<-tm_map(rmsw,stripWhitespace)
+inspect(rmsw)
+trimws(rmsw)
+rmsw<-rmsw[rmsw!=" "]
+inspect(rmsw)
+str_trim(rmsw)
+inspect(rmsw)
+gsub(" ", "", rmsw)
+inspect(rmsw)
+typeof(rmsw)
